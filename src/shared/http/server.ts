@@ -4,6 +4,7 @@ import "express-async-errors";
 import cors from 'cors';
 import routes from './routes';
 import AppError from '@shared/errors/AppError';
+import '../typeorm';
 
 const app = express();
 
@@ -22,7 +23,7 @@ app.use(
       if(error instanceof AppError){
         return response.status(error.statusCode).json({
           status: 'error',
-          message: error.message
+          message: 'Internal server error.'
         });
       }
       return response.status(500).json({
